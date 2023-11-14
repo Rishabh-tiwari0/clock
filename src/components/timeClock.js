@@ -6,12 +6,16 @@ export default class TimeClock extends Component {
     super(props);
     this.state = { date: new Date() };
   }
-  componentDidMount() {
-    setInterval(this.tick, 1000);
-  }
   tick = () => {
     this.setState({ date: new Date() });
   };
+  componentDidMount() {
+    this.timerID = setInterval(this.tick, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
   render() {
     return (
       <div className="rootcontainer">
